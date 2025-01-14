@@ -53,3 +53,55 @@ You can create project with any structure, but it is structure use all good prac
 - The remote directory will contain the configuration fields and setup scripts for our production server.
 - The go.mod file will declare our project dependencies.
 - The Makefile will contain recipes for automating common administrative tasks.
+
+For checking that everything is working correct, try run `Hell world!` app. 
+
+```go
+# File: cmd/api/main.go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello world!")
+}
+```
+
+and run the command to get result:
+
+```bash
+$ go run ./cmd/api
+Hello world!
+```
+
+### A Basic HTTP Server
+
+To start with, we'l configure our server to have just one endpoint: `/v1/healthcheck`. This endpoint will return some basic information about our API.
+
+|URL Pattern|Handler|Action|
+|-----------|-------|------|
+|/v1/healthcheck|healthcheckHandler|Show application information|
+
+I will not describe whole new code, but you can understand by reading comments. In this step we add code to start up our server and the first handler to check health of our application. 
+New:
+    - ./cmd/api/healthcheck.go
+Updated:
+    - ./cmd/api/main.go
+
+After add new lines, you can run and check the new endpoint `/v1/healthcheck`.
+
+```bash
+$ go run ./cmd/api
+2025/01/14 12:10:53 starting development server on :4000
+```
+
+And check the endpoint using curl(or ui solutions):
+
+```bash
+$ curl localhost:4000/v1/healthcheck
+status: available
+environment: development
+version: 1.0.0
+```
+
+NOTE: you can use the flags that we add like that `go run ./cmd/api -port=8080 -env=production`
