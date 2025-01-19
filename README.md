@@ -126,3 +126,48 @@ $ go get github.com/julienschmidt/httprouter
 go: downloading github.com/julienschmidt/httprouter v1.3.0
 go: added github.com/julienschmidt/httprouter v1.3.0
 ```
+
+## Setup Database  
+
+In this project we will use postgresql. 
+
+### Create the database
+
+First we must create new database to our project and connect to the new database:
+
+```
+postgres=# create database greenlight;
+CREATE DATABASE
+postgres=# \c greenlight
+You are now connected to database "greenlight" as user "zhans".
+greenlight=# 
+```
+
+### Create new role
+
+Second we must create the new role to manage greenlight database:
+
+```
+greenlight=# CREATE ROLE greenlight WITH LOGIN PASSWORD 'password';
+CREATE ROLE
+greenlight=# CREATE EXTENSION IF NOT EXISTS citext;
+CREATE EXTENSION
+```
+
+### Connect as the new user
+
+Connect to the database as the new user:
+
+```
+$ psql --host=localhost --dbname=greenlight --username=greenlight
+psql (14.15 (Homebrew))
+Type "help" for help.
+
+greenlight=> SELECT current_user;
+ current_user 
+--------------
+ greenlight
+(1 row)
+
+greenlight=> 
+```
