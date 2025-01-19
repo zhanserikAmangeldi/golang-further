@@ -171,3 +171,13 @@ greenlight=> SELECT current_user;
 
 greenlight=> 
 ```
+
+## SQL migrations
+
+You can use any migration applications, but in that book used golang-migrate:
+
+MACOS:
+
+```
+brew install golang-migrate
+```
