@@ -178,6 +178,6 @@ You can use any migration applications, but in that book used golang-migrate:
 
 MACOS:
 
-```
+```bash
 brew install golang-migrate
 ```
